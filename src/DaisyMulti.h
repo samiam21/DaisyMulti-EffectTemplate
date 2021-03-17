@@ -25,40 +25,7 @@ using namespace daisy;
 
 // Declare a DaisySeed object called hw
 DaisySeed *hw;
-
-// Available Effects
-#define AVAIL_EFFECTS 12
-IEffect *availableEffects[AVAIL_EFFECTS] = {
-    new CleanBoost(),
-    new DaisyChorus(),
-    new DaisyFlanger(),
-    new DaisyTremolo(),
-    new DaisyPhaser(),
-    new AutoWah(),
-    new Crush(),
-    new Distortion(),
-    new Drive(),
-    new Echo(),
-    new DaisyCompressor(),
-    new Reverb()};
-
-// Flash storage parameters
-uint32_t memBase = 0x90000000;
-static EffectStorage DSY_QSPI_BSS effectsStorage[MAX_EFFECTS];
-EffectStorage effectsStorageBuffer[MAX_EFFECTS];
-
-// Pedal state and effects objects
-volatile PedalState currentState = PedalState::PLAY_MODE;
-volatile PedalState newState = PedalState::PLAY_MODE;
-volatile u_int8_t selectedEditEffect = -1;
-char *currentEffectNames[MAX_EFFECTS];
-volatile int currentEffects[MAX_EFFECTS];
-volatile int newEffects[MAX_EFFECTS];
-bool currentEffectsState[MAX_EFFECTS] = {false};
-
-// Effect controls
-Button effectButtons[MAX_EFFECTS];
-Led effectLeds[MAX_EFFECTS];
+IEffect *currentEffect = new CleanBoost();
 
 // Control Encoder
 Encoder controlEncoder;
@@ -89,28 +56,8 @@ void InitializeControls();
 void InitializeEffects();
 
 /**
- * Handles the effect buttons, turning on and off the effects
- */
-void HandleEffectButtons();
-
-/**
- * Handles control of the pedal state
- */
-void HandlePedalState();
-
-/**
  * Reads the control encoder and triggers actions
  */
 void ControlEncoderInterrupt();
-
-/**
- * Updates the effect LEDs, turning them on and off based on the current state
- */
-void UpdateEffectLeds();
-
-/**
- * Saves the current effect settings to flash
- */
-void SaveCurrentEffectSettings();
 
 #endif

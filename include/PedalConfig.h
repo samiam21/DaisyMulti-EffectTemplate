@@ -5,8 +5,8 @@
 
 #define DEBUG 1
 
-#define WAIT_FOR_SERIAL false
-#define ENABLE_DISPLAY true
+#define WAIT_FOR_SERIAL true
+#define ENABLE_DISPLAY false
 
 #define DAISY_BLOCKSIZE 48
 #define DAISY_SAMPLE_RATE daisy::SaiHandle::Config::SampleRate::SAI_48KHZ
@@ -88,13 +88,6 @@
             display->UpdateEditModeToggleValue(value); \
     }
 
-// State enum for the system
-enum PedalState
-{
-    PLAY_MODE = 0,
-    EDIT_MODE = 10
-};
-
 struct EffectSettings
 {
     float knobSettings[MAX_KNOBS];
@@ -107,22 +100,10 @@ struct EffectStorage
     EffectSettings effectSettings;
 };
 
-// /** DEBUG **/
-// const int effectSelectorPinA = 13;
-// const int effectSelectorPinB = 12;
-// const int effectSelectorPinSw = 14;
-
-// const int effectSPDT1Pin1 = 15;
-// const int effectSPDT1Pin2 = 17;
-
-// const int effectSPSTPins[MAX_EFFECTS] = {23};
-// const int effectLedPins[MAX_EFFECTS] = {16};
-// /** DEBUG **/
-
 // Pin Definitions - Selector
-const int effectSelectorPinA = 27;
-const int effectSelectorPinB = 26;
-const int effectSelectorPinSw = 28;
+const int effectSelectorPinA = 28;
+const int effectSelectorPinB = 29;
+const int effectSelectorPinSw = 27;
 
 // Pin Definitions - SPST
 const int effectSPSTPins[MAX_EFFECTS] = {1, 3, 5, 0, 2, 4};
@@ -133,10 +114,10 @@ const int effectSPDT1Pin1 = 12;
 const int effectSPDT1Pin2 = 13;
 
 // Pin Definitions - POT
-const int effectPotPin1 = 21;
-const int effectPotPin2 = 22;
-const int effectPotPin3 = 23;
-const int effectPotPin4 = 24;
+const int effectPotPin1 = 20;
+const int effectPotPin2 = 23;
+const int effectPotPin3 = 22;
+const int effectPotPin4 = 21;
 
 // Pin Definitions - LED
 const int effectLedPins[MAX_EFFECTS] = {19, 17, 15, 20, 18, 16};
