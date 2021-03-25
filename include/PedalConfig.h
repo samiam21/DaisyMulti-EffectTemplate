@@ -87,18 +87,26 @@
         if (ENABLE_DISPLAY)                            \
             display->UpdateEditModeToggleValue(value); \
     }
-
-struct EffectSettings
-{
-    float knobSettings[MAX_KNOBS];
-    u_int8_t togglePosition;
-};
-
-struct EffectStorage
-{
-    int availableEffectsPosition;
-    EffectSettings effectSettings;
-};
+#define updateEditModeKnobValue(display, knobPosition, value)      \
+    {                                                              \
+        if (ENABLE_DISPLAY)                                        \
+            display->UpdateEditModeKnobValue(knobPosition, value); \
+    }
+#define updateEditModeKnobValueI(display, knobPosition, value)      \
+    {                                                               \
+        if (ENABLE_DISPLAY)                                         \
+            display->UpdateEditModeKnobValueI(knobPosition, value); \
+    }
+#define writeDisplayMessage(display, message) \
+    {                                         \
+        if (ENABLE_DISPLAY)                   \
+            display.WriteMessage(message);    \
+    }
+#define writeDisplayMessageF(display, message, args...) \
+    {                                                   \
+        if (ENABLE_DISPLAY)                             \
+            display.WriteMessage(message, args);        \
+    }
 
 // Pin Definitions - Selector
 const int effectSelectorPinA = 28;
