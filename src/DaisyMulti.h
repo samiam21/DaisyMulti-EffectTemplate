@@ -25,7 +25,7 @@ using namespace daisy;
 
 // Declare a DaisySeed object called hw
 DaisySeed *hw;
-IEffect *currentEffect = new CleanBoost();
+IEffect *currentEffect = new Reverb();
 
 // Controls
 Encoder controlEncoder;
