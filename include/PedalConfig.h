@@ -19,7 +19,7 @@
 #define AUDIO_IN_CH 0
 #define AUDIO_OUT_CH 0
 
-#define MAX_EFFECTS 6
+#define MAX_EFFECTS 1
 
 #define MAX_KNOBS 4
 #define KNOB_1_CHN 0
@@ -109,12 +109,12 @@
     }
 
 // Pin Definitions - Selector
-const int effectSelectorPinA = 28;
-const int effectSelectorPinB = 29;
-const int effectSelectorPinSw = 27;
+const int effectSelectorPinA = 27;
+const int effectSelectorPinB = 28;
+const int effectSelectorPinSw = 26;
 
 // Pin Definitions - SPST
-const int effectSPSTPins[MAX_EFFECTS] = {1, 3, 5, 0, 2, 4};
+const int effectSPSTPins[MAX_EFFECTS] = {8};
 const int tapButtonPin = 30;
 
 // Pin Definitions - SPDT
@@ -128,7 +128,7 @@ const int effectPotPin3 = 22;
 const int effectPotPin4 = 21;
 
 // Pin Definitions - LED
-const int effectLedPins[MAX_EFFECTS] = {19, 17, 15, 20, 18, 16};
+const int effectLedPins[MAX_EFFECTS] = {16};
 
 // Pin Definitions - OLED
 const int oledResetPin = 11;

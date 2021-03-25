@@ -13,7 +13,10 @@ void AudioCallback(float **in, float **out, size_t size)
         float wet = in[AUDIO_IN_CH][i];
 
         // Apply the effect
-        wet = currentEffect->Process(wet);
+        if (isEffectOn)
+        {
+            wet = currentEffect->Process(wet);
+        }
 
         // Output the processed signal with the volume level control
         out[AUDIO_OUT_CH][i] = wet * outputLevel;
@@ -40,6 +43,12 @@ void InitializeControls()
 
     // Initialize the controlEncoder
     controlEncoder.Init(hw->GetPin(effectSelectorPinA), hw->GetPin(effectSelectorPinB), hw->GetPin(effectSelectorPinSw), hw->AudioCallbackRate());
+
+    // Initialize on/off controls
+    onOffButton.Init(hw, hw->GetPin(effectSPSTPins[0]));
+    onOffLed.Init(hw->GetPin(effectLedPins[0]), false);
+    onOffLed.Set((isEffectOn) ? 1.f : 0);
+    onOffLed.Update();
 }
 
 /**
@@ -117,6 +126,14 @@ int main(void)
             outputLevel = newOutputLevel;
             debugPrintlnF(hw, "Changed output level to: %.2f", outputLevel);
             updateOutputLevel(display, outputLevel);
+        }
+
+        // Toggle effect on/off
+        if (onOffButton.IsPressed())
+        {
+            isEffectOn = !isEffectOn;
+            onOffLed.Set((isEffectOn) ? 1.f : 0);
+            onOffLed.Update();
         }
 
         // Call the effect's loop

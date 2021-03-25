@@ -27,8 +27,11 @@ using namespace daisy;
 DaisySeed *hw;
 IEffect *currentEffect = new CleanBoost();
 
-// Control Encoder
+// Controls
 Encoder controlEncoder;
+Button onOffButton;
+Led onOffLed;
+bool isEffectOn = true;
 
 // OLED display
 DaisyDisplay display;
