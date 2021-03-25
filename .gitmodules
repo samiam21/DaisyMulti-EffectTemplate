@@ -8,6 +8,6 @@
 	url = https://github.com/electro-smith/DaisySP
 	branch = master
 [submodule "DaisyEffects"]
-	path = lib/Effects
+	path = lib/DaisyEffects
 	url = https://github.com/samiam21/DaisyEffects
 	branch = master
