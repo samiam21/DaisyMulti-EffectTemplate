@@ -6,18 +6,7 @@
 #include "../lib/DaisyEffects/IEffect.h"
 #include "../lib/Inputs/Button.h"
 #include "../lib/Inputs/Knob.h"
-#include "../lib/DaisyEffects/CleanBoost.h"
-#include "../lib/DaisyEffects/DaisyChorus.h"
-#include "../lib/DaisyEffects/DaisyFlanger.h"
-#include "../lib/DaisyEffects/DaisyTremolo.h"
-#include "../lib/DaisyEffects/Crush.h"
-#include "../lib/DaisyEffects/Distortion.h"
-#include "../lib/DaisyEffects/Drive.h"
-#include "../lib/DaisyEffects/AutoWah.h"
-#include "../lib/DaisyEffects/Echo.h"
-#include "../lib/DaisyEffects/DaisyCompressor.h"
-#include "../lib/DaisyEffects/Reverb.h"
-#include "../lib/DaisyEffects/DaisyPhaser.h"
+#include "../lib/DaisyEffects/Metronome.h"
 
 // Use the daisy namespace to prevent having to type
 // daisy:: before all libdaisy functions
@@ -25,7 +14,7 @@ using namespace daisy;
 
 // Declare a DaisySeed object called hw
 DaisySeed *hw;
-IEffect *currentEffect = new Reverb();
+IEffect *currentEffect = new Metronome();
 
 // Controls
 Encoder controlEncoder;
