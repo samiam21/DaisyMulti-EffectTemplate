@@ -49,6 +49,9 @@ void InitializeControls()
     onOffLed.Init(hw->GetPin(effectLedPins[0]), false);
     onOffLed.Set((isEffectOn) ? 1.f : 0);
     onOffLed.Update();
+
+    // Initialize tap tempo controls
+    tapTempoButton.Init(hw, hw->GetPin((tapButtonPin)), 2000U, 300UL);
 }
 
 /**
@@ -134,6 +137,33 @@ int main(void)
             isEffectOn = !isEffectOn;
             onOffLed.Set((isEffectOn) ? 1.f : 0);
             onOffLed.Update();
+        }
+
+        // Tap tempo control
+        if (tapTempoButton.IsPressed())
+        {
+            debugPrintln(hw, "tap pressed");
+
+            // Calculate the duration (ignore a duration longer than 2 seconds)
+            unsigned long duration = System::GetNow() - tapTempoTime;
+            if (duration < 2000)
+            {
+                // Add the duration to the tempo array (cast is safe because duration will never be greater than 2000)
+                tempoArray.push(duration);
+
+                // Calculate the average duration of the items in the array
+                tapTempoAvg = tempoArray.average();
+                debugPrintlnF(hw, "tap avg: %d", tapTempoAvg);
+            }
+            else
+            {
+                // Duration was too long, reset the array for new tempo calculations
+                tempoArray.clear();
+                debugPrintln(hw, "array cleared");
+            }
+
+            // Update the time
+            tapTempoTime = System::GetNow();
         }
 
         // Call the effect's loop

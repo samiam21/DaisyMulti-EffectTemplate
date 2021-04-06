@@ -115,7 +115,7 @@ const int effectSelectorPinSw = 26;
 
 // Pin Definitions - SPST
 const int effectSPSTPins[MAX_EFFECTS] = {8};
-const int tapButtonPin = 30;
+const int tapButtonPin = 7;
 
 // Pin Definitions - SPDT
 const int effectSPDT1Pin1 = 12;

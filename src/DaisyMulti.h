@@ -3,6 +3,7 @@
 
 #include "../include/PedalConfig.h"
 #include "DaisyDisplay.h"
+#include "../lib/Helpers/TempoArray.h"
 #include "../lib/DaisyEffects/IEffect.h"
 #include "../lib/Inputs/Button.h"
 #include "../lib/Inputs/Knob.h"
@@ -19,6 +20,7 @@ IEffect *currentEffect = new Metronome();
 // Controls
 Encoder controlEncoder;
 Button onOffButton;
+Button tapTempoButton;
 Led onOffLed;
 bool isEffectOn = true;
 
@@ -31,6 +33,11 @@ const float outputLevelMin = 0.0f;
 const float outputLevelMax = 10.0f;
 float outputLevel = 5.0f;
 float newOutputLevel = 5.0f;
+
+// Tap tempo
+TempoArray tempoArray;
+unsigned long tapTempoTime = 0;
+unsigned long tapTempoAvg = 0;
 
 /**
  * Audio callback to process each enabled effect
