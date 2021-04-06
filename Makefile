@@ -12,7 +12,7 @@ CPPFLAGS += -DUSB_PRODUCT="\"ELECTROSMITH_DAISY CDC in FS Mode\""
 CPPFLAGS += -DHAL_PCD_MODULE_ENABLED
 
 # Sources
-CPP_SOURCES = src/DaisyMulti.cpp src/DaisyDisplay.cpp lib/DaisyEffects/Metronome.cpp $(wildcard lib/Inputs/*.cpp) $(wildcard lib/Helpers/*.cpp)
+CPP_SOURCES = src/DaisyMulti.cpp src/DaisyDisplay.cpp lib/DaisyEffects/Echo.cpp $(wildcard lib/Inputs/*.cpp) $(wildcard lib/Helpers/*.cpp)
 
 # Library Locations
 LIBDAISY_DIR = lib/libdaisy

@@ -7,7 +7,7 @@
 #include "../lib/DaisyEffects/IEffect.h"
 #include "../lib/Inputs/Button.h"
 #include "../lib/Inputs/Knob.h"
-#include "../lib/DaisyEffects/Metronome.h"
+#include "../lib/DaisyEffects/Echo.h"
 
 // Use the daisy namespace to prevent having to type
 // daisy:: before all libdaisy functions
@@ -15,7 +15,7 @@ using namespace daisy;
 
 // Declare a DaisySeed object called hw
 DaisySeed *hw;
-IEffect *currentEffect = new Metronome();
+IEffect *currentEffect = new Echo();
 
 // Controls
 Encoder controlEncoder;
@@ -38,6 +38,7 @@ float newOutputLevel = 5.0f;
 TempoArray tempoArray;
 unsigned long tapTempoTime = 0;
 unsigned long tapTempoAvg = 0;
+int tapTempoBpm = 0;
 
 /**
  * Audio callback to process each enabled effect

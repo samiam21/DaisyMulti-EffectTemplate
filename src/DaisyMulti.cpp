@@ -51,7 +51,7 @@ void InitializeControls()
     onOffLed.Update();
 
     // Initialize tap tempo controls
-    tapTempoButton.Init(hw, hw->GetPin((tapButtonPin)), 2000U, 300UL);
+    tapTempoButton.Init(hw, hw->GetPin((tapButtonPin)), 2000U, 150UL);
 }
 
 /**
@@ -60,7 +60,7 @@ void InitializeControls()
 void InitializeEffects()
 {
     // Initialize the effect
-    currentEffect->Setup(hw, &display);
+    currentEffect->Setup(hw, &display, &tapTempoBpm);
 }
 
 /**
@@ -142,7 +142,7 @@ int main(void)
         // Tap tempo control
         if (tapTempoButton.IsPressed())
         {
-            debugPrintln(hw, "tap pressed");
+            //debugPrintln(hw, "tap pressed");
 
             // Calculate the duration (ignore a duration longer than 2 seconds)
             unsigned long duration = System::GetNow() - tapTempoTime;
@@ -153,13 +153,15 @@ int main(void)
 
                 // Calculate the average duration of the items in the array
                 tapTempoAvg = tempoArray.average();
-                debugPrintlnF(hw, "tap avg: %d", tapTempoAvg);
+                tapTempoBpm = 60000 / tapTempoAvg;
+                //debugPrintlnF(hw, "tap avg: %d", tapTempoAvg);
+                debugPrintlnF(hw, "tap bpm: %d", tapTempoBpm);
             }
             else
             {
                 // Duration was too long, reset the array for new tempo calculations
                 tempoArray.clear();
-                debugPrintln(hw, "array cleared");
+                //debugPrintln(hw, "array cleared");
             }
 
             // Update the time
