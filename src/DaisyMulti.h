@@ -3,21 +3,11 @@
 
 #include "../include/PedalConfig.h"
 #include "DaisyDisplay.h"
+#include "../lib/Helpers/TempoArray.h"
 #include "../lib/DaisyEffects/IEffect.h"
 #include "../lib/Inputs/Button.h"
 #include "../lib/Inputs/Knob.h"
-#include "../lib/DaisyEffects/CleanBoost.h"
-#include "../lib/DaisyEffects/DaisyChorus.h"
-#include "../lib/DaisyEffects/DaisyFlanger.h"
-#include "../lib/DaisyEffects/DaisyTremolo.h"
-#include "../lib/DaisyEffects/Crush.h"
-#include "../lib/DaisyEffects/Distortion.h"
-#include "../lib/DaisyEffects/Drive.h"
-#include "../lib/DaisyEffects/AutoWah.h"
 #include "../lib/DaisyEffects/Echo.h"
-#include "../lib/DaisyEffects/DaisyCompressor.h"
-#include "../lib/DaisyEffects/Reverb.h"
-#include "../lib/DaisyEffects/DaisyPhaser.h"
 
 // Use the daisy namespace to prevent having to type
 // daisy:: before all libdaisy functions
@@ -25,10 +15,14 @@ using namespace daisy;
 
 // Declare a DaisySeed object called hw
 DaisySeed *hw;
-IEffect *currentEffect = new CleanBoost();
+IEffect *currentEffect = new Echo();
 
-// Control Encoder
+// Controls
 Encoder controlEncoder;
+Button onOffButton;
+Button tapTempoButton;
+Led onOffLed;
+bool isEffectOn = true;
 
 // OLED display
 DaisyDisplay display;
@@ -39,6 +33,12 @@ const float outputLevelMin = 0.0f;
 const float outputLevelMax = 10.0f;
 float outputLevel = 5.0f;
 float newOutputLevel = 5.0f;
+
+// Tap tempo
+TempoArray tempoArray;
+unsigned long tapTempoTime = 0;
+unsigned long tapTempoAvg = 0;
+int tapTempoBpm = 0;
 
 /**
  * Audio callback to process each enabled effect
